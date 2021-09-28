@@ -11,10 +11,16 @@ public class PlayerMove_Rio : MonoBehaviour
     public float gravity = 20.0F;
     private Vector3 moveDirection = Vector3.zero;
 
+    public LineRenderer lineR;
+
     // Start is called before the first frame update
     void Start()
     {
-        controller = GetComponent<CharacterController>();    
+        controller = GetComponent<CharacterController>();
+
+       // lineR.SetPosition(0, 오른손위치);
+        //lineR.SetPosition(1, 맞은위치);
+
     }
 
     // Update is called once per frame

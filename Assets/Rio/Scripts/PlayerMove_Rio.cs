@@ -17,15 +17,14 @@ public class PlayerMove_Rio : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
 
-        //현재 게임오브젝트의 각도를 mx.my에 셋팅
-        mx = transform.localEulerAngles.x;
-        my = transform.localEulerAngles.y;
+      
     }
 
     // Update is called once per frame
     void Update()
     {
         playerMove();
+        playerRot();
     }
 
     void playerMove()
@@ -47,15 +46,29 @@ public class PlayerMove_Rio : MonoBehaviour
     }
 
 
-    float mx;
-    float my;
-    public float rotSpeed = 200;
-
     void playerRot()
-    { 
-       
+    {
+        transform.rotation = Quaternion.Euler(rot);
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickRight, OVRInput.Controller.RTouch))
+        {
+            rotPlus();
+        }
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickLeft, OVRInput.Controller.RTouch))
+        {
+            rotMinus();
+        }
 
 
+    }
+
+    Vector3 rot;
+    void rotPlus()
+    {
+        rot.y += 45;
+    }
+    void rotMinus()
+    {
+        rot.y -= 45;
     }
 
 }

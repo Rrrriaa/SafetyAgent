@@ -31,17 +31,27 @@ public class KHJ_HandCtrl : MonoBehaviour
             trCatchedR.GetComponent<KHJ_Item>().DisappearItem();
 
         }
-
+        transform.rotation = Quaternion.Euler(rot);
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickRight, OVRInput.Controller.RTouch))
+        {
+            rotPlus();
+        }
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickLeft, OVRInput.Controller.RTouch))
+        {
+            rotMinus();
+        }
 
     }
 
     void CatchObj()
     {
+
         //1. 만약에 오른쪽 컨트롤러의 그랩버튼을 누르면
         if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
         {
             //2. 오른손위치, 오른손앞방향에서 나가는 Ray를 만든다
             Ray ray = new Ray(trRight.position, trRight.forward);
+            
             int layer = 1 << LayerMask.NameToLayer("CatchObj");
 
             #region SpereCastAll
@@ -145,4 +155,17 @@ public class KHJ_HandCtrl : MonoBehaviour
         Gizmos.DrawSphere(trRight.position, 1);
         Gizmos.DrawSphere(trLeft.position, 1);
     }
+
+
+    Vector3 rot;
+    void rotPlus()
+    {
+        rot.y += 45;
+    }
+    void rotMinus()
+    {
+        rot.y -= 45;
+    }
+
+
 }

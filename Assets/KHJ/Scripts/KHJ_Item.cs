@@ -12,7 +12,11 @@ public class KHJ_Item : MonoBehaviour
 
     void Update()
     {
-        
+        if (isGrab)
+            print(name);
+
+
+
     }
     public void DisappearItem()
     {
@@ -23,11 +27,21 @@ public class KHJ_Item : MonoBehaviour
     {
         if(other.name == "Torch")
         {
-            if(gameObject.name == "Battery")
+            if(name == "Battery")
             {
+                print("isBattery");
                 weldingSceneMngr.instance.isBattery = true;
             }            
         }
+
+        if(name == "Pipe")
+        {
+            if(other.name == "PipePos")
+            {
+                weldingSceneMngr.instance.isPipe = true;
+            }
+        }
+
     }
     private void OnTriggerExit(Collider other)
     {

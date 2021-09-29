@@ -9,7 +9,9 @@ public class weldingSceneMngr : MonoBehaviour
     public GameObject Torch;
     public GameObject Battery;
     public bool isBattery;
-
+    public GameObject Pipe;
+    public GameObject PipePos;
+    public bool isPipe;
 
     private void Awake()
     {
@@ -22,12 +24,12 @@ public class weldingSceneMngr : MonoBehaviour
     }
     void Start()
     {
-        Test();
     }
 
     void Update()
     {
-
+        SetBattery();
+        SetPipe();
     }
 
     void SetBattery()
@@ -46,15 +48,15 @@ public class weldingSceneMngr : MonoBehaviour
             }
         }
     }
-
-    void Test()
+    void SetPipe()
     {
-        Battery.transform.parent = Torch.transform;
-        Battery.transform.position = Torch.transform.position;
-        Battery.transform.rotation = Torch.transform.rotation;
+        if (isPipe)
+        {
+            Pipe.transform.position = PipePos.transform.position;
+            Pipe.transform.rotation = PipePos.transform.rotation;
 
-        Battery.GetComponent<Rigidbody>().isKinematic = true;
-        Torch.GetComponent<Rigidbody>().isKinematic = true;
+            Pipe.GetComponent<Rigidbody>().isKinematic = true;
+            Pipe.layer = 0;
+        }
     }
-
 }

@@ -48,6 +48,7 @@ public class weldingSceneMngr : MonoBehaviour
                 Battery.transform.position = Torch.transform.position;
                 Battery.transform.rotation = Torch.transform.rotation;
                 Battery.layer = 0;
+                Battery.GetComponent<Collider>().enabled = false;
                 Battery.GetComponent<Rigidbody>().isKinematic = true;
                 Torch.GetComponent<Rigidbody>().isKinematic = true;
             }

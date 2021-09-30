@@ -28,5 +28,10 @@ public class Torch : MonoBehaviour
                 Flame.SetActive(false);
             }
         }
+        else
+        {
+            ani.SetTrigger("Off");
+            Flame.SetActive(false);
+        }
     }
 }

@@ -25,9 +25,9 @@ public class KHJ_Item : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.name == "Torch")
+        if(other.name == "Torch" && other.GetComponent<KHJ_Item>().isGrab)
         {
-            if(name == "Battery")
+            if(name == "Battery" && GetComponent<KHJ_Item>().isGrab)
             {
                 print("isBattery");
                 weldingSceneMngr.instance.isBattery = true;

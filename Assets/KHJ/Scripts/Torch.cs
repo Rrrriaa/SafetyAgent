@@ -5,6 +5,7 @@ using UnityEngine;
 public class Torch : MonoBehaviour
 {
     Animator ani;
+    public GameObject Flame;
     void Start()
     {
         ani = GetComponent<Animator>();
@@ -13,15 +14,18 @@ public class Torch : MonoBehaviour
     void Update()
     {
         //베터리가 껴져있고, 손에 들고있다면
-        if (weldingSceneMngr.instance.isBattery && GetComponent<KHJ_Item>().isGrab)
+        if (GetComponent<KHJ_Item>().isGrab)
         {
-            if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.Touch))
             { 
-                ani.SetTrigger("On");            
+                ani.SetTrigger("On");
+                if(weldingSceneMngr.instance.isBattery)
+                    Flame.SetActive(true);
             }
-            if (OVRInput.GetUp(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
+            if (OVRInput.GetUp(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.Touch))
             {
                 ani.SetTrigger("Off");
+                Flame.SetActive(false);
             }
         }
     }

@@ -4,23 +4,31 @@ using UnityEngine;
 
 public class Burn : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject[] Fire;
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        print(collision.gameObject.name);
-        //if(collision.gameObject.name)
+        if(other.gameObject.name == "TorchFire")
+        {
+            ActiveFireEft();
+            weldingSceneMngr.instance.StageFail(FAIL_INDEX.FIRE);
+        }
     }
 
-
+    void ActiveFireEft()
+    {
+        for(int i = 0; i < Fire.Length; i++)
+        {
+            Fire[i].SetActive(true);
+        }
+    }
 }

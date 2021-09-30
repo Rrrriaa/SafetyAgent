@@ -77,6 +77,13 @@ public class Torch : MonoBehaviour
             else
                 spherelight.enabled = true;
 
+
+            //마스크나 보호구를 착용 안했다면
+            if(!weldingSceneMngr.instance.isMask || !weldingSceneMngr.instance.isHelmet)
+            {
+                //스테이지 실패
+                weldingSceneMngr.instance.StageFail(FAIL_INDEX.HELMET);
+            }
         }
         else
         {
@@ -84,5 +91,4 @@ public class Torch : MonoBehaviour
             weldingSceneMngr.instance.isWelding = false;
         }
     }
-
 }

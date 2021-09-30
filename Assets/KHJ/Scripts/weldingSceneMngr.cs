@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum FAIL_INDEX
+{
+    HELMET,
+    FIRE
+}
+
 public class weldingSceneMngr : MonoBehaviour
 {
     public static weldingSceneMngr instance;
@@ -15,8 +22,9 @@ public class weldingSceneMngr : MonoBehaviour
 
     public bool isHelmet;
     public bool isMask;
-
+    
     public bool isWelding;
+    
 
     private void Awake()
     {
@@ -78,6 +86,15 @@ public class weldingSceneMngr : MonoBehaviour
         Battery.GetComponent<Collider>().enabled = false;
         Battery.GetComponent<Rigidbody>().isKinematic = true;
         Torch.GetComponent<Rigidbody>().isKinematic = true;
+    }
+
+
+    public void StageFail(FAIL_INDEX index)
+    {
+        if(index == FAIL_INDEX.HELMET)
+            print("보호장비 미착용으로 인한 부상");
+        if (index == FAIL_INDEX.FIRE)
+            print("발화");
     }
 
 }

@@ -54,6 +54,7 @@ public class HandCtrl_Rio : MonoBehaviour
 
         if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
         {
+            
             //2. 왼손위치, 왼손앞방향에서 나가는 Ray를 만든다
             Ray ray = new Ray(trLeft.position, trLeft.forward);
             int layer = 1 << LayerMask.NameToLayer("CatchObj");

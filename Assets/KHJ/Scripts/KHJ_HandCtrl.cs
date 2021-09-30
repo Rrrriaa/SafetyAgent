@@ -70,9 +70,8 @@ public class KHJ_HandCtrl : MonoBehaviour
             #endregion
         }
 
-        if (trCatchedR && trCatchedR.gameObject.tag=="DisappearItem")
-        {           
-                   
+        if (trCatchedR && trCatchedR.gameObject.tag == "DisappearItem")
+        {                   
             switch (trCatchedR.gameObject.name)
             {
                 case "Helmet":
@@ -83,7 +82,9 @@ public class KHJ_HandCtrl : MonoBehaviour
                     weldingSceneMngr.instance.isMask = true;
                     Destroy(trCatchedR.gameObject);
                     return;
-                case "Paper":
+                case "Papers1":
+                case "Papers2":
+                case "ToiletPaper":
                     Destroy(trCatchedR.gameObject);
                     return;
             }

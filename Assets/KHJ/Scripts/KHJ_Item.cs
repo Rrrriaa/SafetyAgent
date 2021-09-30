@@ -5,6 +5,10 @@ using UnityEngine;
 public class KHJ_Item : MonoBehaviour
 {
     public bool isGrab;
+
+    public bool iscombustibles;
+
+
     void Start()
     {
         

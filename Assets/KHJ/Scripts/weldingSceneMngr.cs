@@ -16,7 +16,7 @@ public class weldingSceneMngr : MonoBehaviour
     public bool isHelmet;
     public bool isMask;
 
-
+    public bool isWelding;
 
     private void Awake()
     {
@@ -33,6 +33,7 @@ public class weldingSceneMngr : MonoBehaviour
 
     void Update()
     {
+        Test();
         SetBattery();
         SetPipe();
     }
@@ -65,4 +66,18 @@ public class weldingSceneMngr : MonoBehaviour
             Pipe.layer = 0;
         }
     }
+
+
+    void Test()
+    {
+        isBattery = true;
+        Battery.transform.parent = Torch.transform;
+        Battery.transform.position = Torch.transform.position;
+        Battery.transform.rotation = Torch.transform.rotation;
+        Battery.layer = 0;
+        Battery.GetComponent<Collider>().enabled = false;
+        Battery.GetComponent<Rigidbody>().isKinematic = true;
+        Torch.GetComponent<Rigidbody>().isKinematic = true;
+    }
+
 }

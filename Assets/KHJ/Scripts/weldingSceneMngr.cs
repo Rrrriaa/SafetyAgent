@@ -13,6 +13,11 @@ public class weldingSceneMngr : MonoBehaviour
     public GameObject PipePos;
     public bool isPipe;
 
+    public bool isHelmet;
+    public bool isMask;
+
+
+
     private void Awake()
     {
         if (instance == null)

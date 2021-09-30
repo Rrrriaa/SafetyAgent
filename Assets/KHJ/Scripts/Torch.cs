@@ -16,13 +16,13 @@ public class Torch : MonoBehaviour
         //베터리가 껴져있고, 손에 들고있다면
         if (GetComponent<KHJ_Item>().isGrab)
         {
-            if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.Touch))
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
             { 
                 ani.SetTrigger("On");
                 if(weldingSceneMngr.instance.isBattery)
                     Flame.SetActive(true);
             }
-            if (OVRInput.GetUp(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.Touch))
+            if (OVRInput.GetUp(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
             {
                 ani.SetTrigger("Off");
                 Flame.SetActive(false);

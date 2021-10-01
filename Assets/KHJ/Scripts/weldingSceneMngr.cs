@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum FAIL_INDEX
+{
+    HELMET,
+    FIRE
+}
+
 public class weldingSceneMngr : MonoBehaviour
 {
     public static weldingSceneMngr instance;
@@ -12,6 +19,12 @@ public class weldingSceneMngr : MonoBehaviour
     public GameObject Pipe;
     public GameObject PipePos;
     public bool isPipe;
+
+    public bool isHelmet;
+    public bool isMask;
+    
+    public bool isWelding;
+    
 
     private void Awake()
     {
@@ -26,10 +39,21 @@ public class weldingSceneMngr : MonoBehaviour
     {
     }
 
+
+    public float currTime = 0;
+    float FireTime = 2;
+    float SuccessTime = 10;
     void Update()
     {
+        Test();
         SetBattery();
         SetPipe();
+
+        if (isWelding)
+        {
+            currTime += Time.deltaTime;
+        }
+        CheckFire();
     }
 
     void SetBattery()
@@ -42,7 +66,8 @@ public class weldingSceneMngr : MonoBehaviour
                 Battery.transform.parent = Torch.transform;
                 Battery.transform.position = Torch.transform.position;
                 Battery.transform.rotation = Torch.transform.rotation;
-
+                Battery.layer = 0;
+                Battery.GetComponent<Collider>().enabled = false;
                 Battery.GetComponent<Rigidbody>().isKinematic = true;
                 Torch.GetComponent<Rigidbody>().isKinematic = true;
             }
@@ -59,4 +84,41 @@ public class weldingSceneMngr : MonoBehaviour
             Pipe.layer = 0;
         }
     }
+
+    void Test()
+    {
+        isBattery = true;
+        Battery.transform.parent = Torch.transform;
+        Battery.transform.position = Torch.transform.position;
+        Battery.transform.rotation = Torch.transform.rotation;
+        Battery.layer = 0;
+        Battery.GetComponent<Collider>().enabled = false;
+        Battery.GetComponent<Rigidbody>().isKinematic = true;
+        Torch.GetComponent<Rigidbody>().isKinematic = true;
+    }
+
+    void CheckFire()
+    {
+        if (currTime > FireTime)
+        {
+
+        }
+        if (currTime > SuccessTime)
+        {
+            StageSuccess();
+        }
+    }
+
+    public void StageFail(FAIL_INDEX index)
+    {
+        if(index == FAIL_INDEX.HELMET)
+            print("보호장비 미착용으로 인한 부상");
+        if (index == FAIL_INDEX.FIRE)
+            print("발화");
+    }
+    public void StageSuccess()
+    {
+
+    }
+
 }

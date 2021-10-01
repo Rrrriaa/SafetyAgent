@@ -5,6 +5,10 @@ using UnityEngine;
 public class KHJ_Item : MonoBehaviour
 {
     public bool isGrab;
+
+    public bool iscombustibles;
+
+
     void Start()
     {
         
@@ -12,10 +16,6 @@ public class KHJ_Item : MonoBehaviour
 
     void Update()
     {
-        if (isGrab)
-            print(name);
-
-
 
     }
     public void DisappearItem()
@@ -25,9 +25,9 @@ public class KHJ_Item : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.name == "Torch")
+        if(other.name == "Torch" && other.GetComponent<KHJ_Item>().isGrab)
         {
-            if(name == "Battery")
+            if(name == "Battery" && GetComponent<KHJ_Item>().isGrab)
             {
                 print("isBattery");
                 weldingSceneMngr.instance.isBattery = true;

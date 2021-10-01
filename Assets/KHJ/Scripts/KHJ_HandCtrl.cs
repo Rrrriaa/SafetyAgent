@@ -70,15 +70,26 @@ public class KHJ_HandCtrl : MonoBehaviour
             #endregion
         }
 
-        if (trCatchedR)
-        {
-            if (trCatchedR.gameObject.name == "Helmet" || trCatchedR.gameObject.name == "WelderMask")
+        if (trCatchedR && trCatchedR.gameObject.tag == "DisappearItem")
+        {                   
+            switch (trCatchedR.gameObject.name)
             {
-                Destroy(trCatchedR.gameObject);
-                trCatchedR = null;
+                case "Helmet":
+                    weldingSceneMngr.instance.isHelmet = true;
+                    Destroy(trCatchedR.gameObject);
+                    return;
+                case "WelderMask":
+                    weldingSceneMngr.instance.isMask = true;
+                    Destroy(trCatchedR.gameObject);
+                    return;
+                case "Papers1":
+                case "Papers2":
+                case "ToiletPaper":
+                    Destroy(trCatchedR.gameObject);
+                    return;
             }
+            trCatchedR = null;
         }
-
     }
 
     void DropObj()

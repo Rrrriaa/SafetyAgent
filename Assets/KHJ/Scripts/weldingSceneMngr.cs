@@ -117,6 +117,7 @@ public class weldingSceneMngr : MonoBehaviour
     public void StageFail(FAIL_INDEX index)
     {
         StartCoroutine(FadeInMono());
+        StartCoroutine(FadeIn());
         EndCanvas.SetActive(true);
 
         if (index == FAIL_INDEX.HELMET)
@@ -132,16 +133,22 @@ public class weldingSceneMngr : MonoBehaviour
 
     float time = 0f;
     float F_time = 1f;
-    IEnumerator FadeIn(Image obj)
+    float time1 = 0f;
+    float F_time1 = 10f;
+    IEnumerator FadeIn()
     {
-        obj.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        ColorParameter a = color.colorFilter;
+        Color alpha = a.value;
         time = 0f;
-        Color alpha = obj.color;
-        while (alpha.a < 1f)
+        while (alpha.r > 0f)
         {
-            time += Time.deltaTime / F_time;
-            alpha.a = Mathf.Lerp(0, 1, time);
-            obj.color = alpha;
+            color.saturation.value = -100;
+            time1 += Time.deltaTime / F_time1;
+            alpha.r = Mathf.Lerp(1, 0, time1);
+            alpha.g = Mathf.Lerp(1, 0, time1);
+            alpha.b = Mathf.Lerp(1, 0, time1);
+            color.colorFilter.value = alpha;
             yield return null;
         }
     }

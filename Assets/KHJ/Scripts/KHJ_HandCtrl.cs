@@ -16,10 +16,27 @@ public class KHJ_HandCtrl : MonoBehaviour
 
     public float throwPower = 5;
 
+
+    public GameObject HelpMan;
+
+
     void Update()
     {
         CatchObj();
         DropObj();
+
+        if (OVRInput.GetDown(OVRInput.RawButton.Y, OVRInput.Controller.LTouch))
+        {
+            //Next
+            HelpMan.GetComponent<HelpMan>().DisplayNextSentence();
+        }
+        if (OVRInput.GetDown(OVRInput.RawButton.X, OVRInput.Controller.LTouch))
+        {
+            //Pre
+            HelpMan.GetComponent<HelpMan>().DisplayPreSentence();
+        }
+
+
     }
 
     void CatchObj()

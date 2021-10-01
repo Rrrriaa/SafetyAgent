@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
 
 public enum FAIL_INDEX
 {
@@ -24,7 +25,11 @@ public class weldingSceneMngr : MonoBehaviour
     public bool isMask;
     
     public bool isWelding;
-    
+
+    ColorGrading color;
+
+    public GameObject EndCanvas;
+    public Text EndText;
 
     private void Awake()
     {
@@ -37,6 +42,8 @@ public class weldingSceneMngr : MonoBehaviour
     }
     void Start()
     {
+        var PostProcess = FindObjectOfType<PostProcessVolume>();
+        color = PostProcess.profile.GetSetting<ColorGrading>();
     }
 
 
@@ -84,7 +91,6 @@ public class weldingSceneMngr : MonoBehaviour
             Pipe.layer = 0;
         }
     }
-
     void Test()
     {
         isBattery = true;
@@ -96,7 +102,6 @@ public class weldingSceneMngr : MonoBehaviour
         Battery.GetComponent<Rigidbody>().isKinematic = true;
         Torch.GetComponent<Rigidbody>().isKinematic = true;
     }
-
     void CheckFire()
     {
         if (currTime > FireTime)
@@ -111,14 +116,52 @@ public class weldingSceneMngr : MonoBehaviour
 
     public void StageFail(FAIL_INDEX index)
     {
-        if(index == FAIL_INDEX.HELMET)
-            print("보호장비 미착용으로 인한 부상");
+        StartCoroutine(FadeInMono());
+        StartCoroutine(FadeIn());
+        EndCanvas.SetActive(true);
+
+        if (index == FAIL_INDEX.HELMET)
+            EndText.text = "보호장비 미착용으로 인한 부상";
         if (index == FAIL_INDEX.FIRE)
-            print("발화");
+            EndText.text = "발화";
     }
     public void StageSuccess()
     {
 
     }
 
+
+    float time = 0f;
+    float F_time = 1f;
+    float time1 = 0f;
+    float F_time1 = 10f;
+    IEnumerator FadeIn()
+    {
+        yield return new WaitForSeconds(3f);
+        ColorParameter a = color.colorFilter;
+        Color alpha = a.value;
+        time = 0f;
+        while (alpha.r > 0f)
+        {
+            color.saturation.value = -100;
+            time1 += Time.deltaTime / F_time1;
+            alpha.r = Mathf.Lerp(1, 0, time1);
+            alpha.g = Mathf.Lerp(1, 0, time1);
+            alpha.b = Mathf.Lerp(1, 0, time1);
+            color.colorFilter.value = alpha;
+            yield return null;
+        }
+    }
+    IEnumerator FadeInMono()
+    {
+        time = 0f;
+        float alpha = color.saturation.value;
+        while (alpha >= -100f)
+        {
+            time += Time.deltaTime / F_time;
+            alpha = Mathf.Lerp(0, -100, time);
+            color.saturation.value = alpha;
+            yield return null;
+        }
+    }
 }

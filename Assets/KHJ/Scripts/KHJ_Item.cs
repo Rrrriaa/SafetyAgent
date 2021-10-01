@@ -16,10 +16,6 @@ public class KHJ_Item : MonoBehaviour
 
     void Update()
     {
-        if (isGrab)
-            print(name);
-
-
 
     }
     public void DisappearItem()

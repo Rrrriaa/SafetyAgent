@@ -39,11 +39,21 @@ public class weldingSceneMngr : MonoBehaviour
     {
     }
 
+
+    public float currTime = 0;
+    float FireTime = 2;
+    float SuccessTime = 10;
     void Update()
     {
         Test();
         SetBattery();
         SetPipe();
+
+        if (isWelding)
+        {
+            currTime += Time.deltaTime;
+        }
+        CheckFire();
     }
 
     void SetBattery()
@@ -75,7 +85,6 @@ public class weldingSceneMngr : MonoBehaviour
         }
     }
 
-
     void Test()
     {
         isBattery = true;
@@ -88,6 +97,17 @@ public class weldingSceneMngr : MonoBehaviour
         Torch.GetComponent<Rigidbody>().isKinematic = true;
     }
 
+    void CheckFire()
+    {
+        if (currTime > FireTime)
+        {
+
+        }
+        if (currTime > SuccessTime)
+        {
+            StageSuccess();
+        }
+    }
 
     public void StageFail(FAIL_INDEX index)
     {
@@ -95,6 +115,10 @@ public class weldingSceneMngr : MonoBehaviour
             print("보호장비 미착용으로 인한 부상");
         if (index == FAIL_INDEX.FIRE)
             print("발화");
+    }
+    public void StageSuccess()
+    {
+
     }
 
 }

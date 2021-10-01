@@ -8,6 +8,8 @@ public class Torch : MonoBehaviour
     public GameObject Flame;
 
 
+    public LayerMask lay;
+
     void Start()
     {
         ani = GetComponent<Animator>();
@@ -35,6 +37,7 @@ public class Torch : MonoBehaviour
             }
             if (OVRInput.GetUp(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
             {
+                weldingSceneMngr.instance.isWelding = false;
                 ani.SetTrigger("Off");
                 Flame.SetActive(false);
                 WeldingEft.SetActive(false);
@@ -58,8 +61,9 @@ public class Torch : MonoBehaviour
         //레이캐스팅 결과정보를 hit라는 이름으로 정한다.
         RaycastHit hit;
         spherelight = Sphere.GetComponent<Light>();
+        int layer = 1 << LayerMask.NameToLayer("TorchFire");
         //레이캐스트 쏘는 위치, 방향, 결과값, 최대인식거리
-        if (Physics.Raycast(RayPos.transform.position, RayPos.transform.forward, out hit, 0.5f))
+        if (Physics.Raycast(RayPos.transform.position, RayPos.transform.forward, out hit, 0.5f, lay))
         {
             if(hit.transform.gameObject.name == "Pipe")
             {

@@ -19,16 +19,16 @@ public class Burn : MonoBehaviour
     {
         if(other.gameObject.name == "TorchFire")
         {
-            ActiveFireEft();
-            weldingSceneMngr.instance.StageFail(FAIL_INDEX.FIRE);
+            ActiveFireEft();            
         }
     }
 
-    void ActiveFireEft()
+    public void ActiveFireEft()
     {
         for(int i = 0; i < Fire.Length; i++)
         {
             Fire[i].SetActive(true);
         }
+        weldingSceneMngr.instance.StageFail(FAIL_INDEX.FIRE);
     }
 }

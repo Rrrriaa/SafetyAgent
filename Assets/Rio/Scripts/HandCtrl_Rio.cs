@@ -12,9 +12,10 @@ public class HandCtrl_Rio : MonoBehaviour
     //잡은 물체의 Transform
     public Transform trCatchedR;
     public Transform trCatchedL;
-
+    
     public float throwPower = 5;
 
+    public GameObject HelpMan;
     void Start()
     {
 
@@ -24,6 +25,21 @@ public class HandCtrl_Rio : MonoBehaviour
     {
         CatchObj();
         DropObj();
+        HelpManUI();
+    }
+
+    void HelpManUI()
+    {
+        if (OVRInput.GetDown(OVRInput.RawButton.Y, OVRInput.Controller.LTouch))
+        {
+            //Next
+            HelpMan.GetComponent<HelpMan>().DisplayNextSentence();
+        }
+        if (OVRInput.GetDown(OVRInput.RawButton.X, OVRInput.Controller.LTouch))
+        {
+            //Pre
+            HelpMan.GetComponent<HelpMan>().DisplayPreSentence();
+        }
     }
 
     void CatchObj()
@@ -43,10 +59,7 @@ public class HandCtrl_Rio : MonoBehaviour
 
             if (Physics.SphereCast (ray, 0.1f, out hit, 1f, layer))
             {
-                if (hit.transform.gameObject.name == "UpBTN"|| hit.transform.gameObject.name == "DownBTN")
-                {
-
-                }
+                
                
                 //4. 부딪힌 물체를 잡는다. (부딪힌 물체를 오른손의 자식으로 한다)
                 hit.transform.parent = trRight;

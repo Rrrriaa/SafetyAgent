@@ -39,6 +39,9 @@ public class KHJ_Item : MonoBehaviour
             if(other.name == "PipePos")
             {
                 weldingSceneMngr.instance.isPipe = true;
+                weldingSceneMngr.instance.PipeCanvas.SetActive(true);
+                weldingSceneMngr.instance.PipeText.fontSize = 25;
+                weldingSceneMngr.instance.PipeText.text = "용접 시작";
             }
         }
 

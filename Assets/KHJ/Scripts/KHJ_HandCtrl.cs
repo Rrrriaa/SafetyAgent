@@ -51,7 +51,7 @@ public class KHJ_HandCtrl : MonoBehaviour
 
             #region SpereCast
             RaycastHit hit;
-            if (Physics.SphereCast(ray, 0.1f, out hit, 100, layer))
+            if (Physics.SphereCast(ray, 0.1f, out hit, 1, layer))
             {
                 //4. 부딪힌 물체를 잡는다. (부딪힌 물체를 오른손의 자식으로 한다)
                 hit.transform.parent = trRight;
@@ -73,7 +73,7 @@ public class KHJ_HandCtrl : MonoBehaviour
 
             #region SpereCast
             RaycastHit hit;
-            if (Physics.SphereCast(ray, 0.1f, out hit, 100, layer))
+            if (Physics.SphereCast(ray, 0.1f, out hit, 1, layer))
             {
                 //4. 부딪힌 물체를 잡는다. (부딪힌 물체를 왼손의 자식으로 한다)
                 hit.transform.parent = trLeft;
@@ -88,7 +88,7 @@ public class KHJ_HandCtrl : MonoBehaviour
         }
 
         if (trCatchedR && trCatchedR.gameObject.tag == "DisappearItem")
-        {                   
+        {            
             switch (trCatchedR.gameObject.name)
             {
                 case "Helmet":
@@ -102,6 +102,7 @@ public class KHJ_HandCtrl : MonoBehaviour
                 case "Papers1":
                 case "Papers2":
                 case "ToiletPaper":
+                    weldingSceneMngr.instance.DeleteObj(trCatchedR.gameObject);
                     Destroy(trCatchedR.gameObject);
                     return;
             }

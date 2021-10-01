@@ -36,14 +36,22 @@ public class HandCtrl_Rio : MonoBehaviour
 
             int layer = 1 << LayerMask.NameToLayer("CatchObj");
 
-            #region SpereCast
+            #region SpereCastAll
+            //RaycastHit[] hits = Physics.SphereCastAll(ray, 0.1f, 1f, layer);
+         
             RaycastHit hit;
-            if (Physics.SphereCast(ray, 0.1f, out hit, 1f, layer))
+
+            if (Physics.SphereCast (ray, 0.1f, out hit, 1f, layer))
             {
+                if (hit.transform.gameObject.name == "UpBTN"|| hit.transform.gameObject.name == "DownBTN")
+                {
+
+                }
+               
                 //4. 부딪힌 물체를 잡는다. (부딪힌 물체를 오른손의 자식으로 한다)
                 hit.transform.parent = trRight;
-                //hit.transform.position = trRight.position;
-                //hit.transform.rotation = trRight.rotation;
+                hit.transform.position = trRight.position;
+                hit.transform.rotation = trRight.rotation;
                 //5. 잡은 물체를 trcatched에 넣어둔다
                 trCatchedR = hit.transform;
 

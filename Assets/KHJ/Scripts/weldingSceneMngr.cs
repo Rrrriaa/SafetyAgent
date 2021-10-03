@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Video;
 
 public enum FAIL_INDEX
 {
@@ -160,7 +162,13 @@ public class weldingSceneMngr : MonoBehaviour
             EndText.text = "원인 : 보호장비 미착용" + '\n' +"tip : 보호장비를 착용하세요";
         if (index == FAIL_INDEX.FIRE)
             EndText.text = "원인 : 발화" + '\n' + "tip : 가연성 물질을 제거하세요";
+        //씬다시 리로드
+        StartCoroutine(SceneReload(false));
     }
+
+
+    //영상 컨트롤러
+    public VideoPlayer video;
     public void StageSuccess()
     {
         StartCoroutine(FadeIn());
@@ -168,6 +176,10 @@ public class weldingSceneMngr : MonoBehaviour
         EndResult.text = "스테이지 성공";
         EndText.text = "안전하게 작업을 완료하셨습니다! 수고하셨습니다!";
         PipeS.AddComponent<Rigidbody>();
+
+        video.Play();
+        //씬다시 리로드
+        //StartCoroutine(SceneReload(true));
     }
 
 
@@ -177,7 +189,7 @@ public class weldingSceneMngr : MonoBehaviour
     float F_time1 = 10f;
     IEnumerator FadeIn()
     {
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(30f);
         ColorParameter a = color.colorFilter;
         Color alpha = a.value;
         time = 0f;
@@ -203,5 +215,24 @@ public class weldingSceneMngr : MonoBehaviour
             color.saturation.value = alpha;
             yield return null;
         }
+    }
+
+
+
+    IEnumerator SceneReload(bool isSuccess)
+    {
+        yield return new WaitForSeconds(3f);
+        //성공 -> 첫화면으로 이동
+        if (isSuccess)
+        {
+            SceneManager.LoadScene(0);
+        }
+        //실패 
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+       
     }
 }

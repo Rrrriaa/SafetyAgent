@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Video;
+using UnityEngine.SceneManagement;
 
 public class SceneMngr_Rio : MonoBehaviour
 {
@@ -30,6 +32,7 @@ public class SceneMngr_Rio : MonoBehaviour
     {
         
     }
+
     public void StageFail()
     {
         StartCoroutine(FadeInMono());
@@ -37,9 +40,19 @@ public class SceneMngr_Rio : MonoBehaviour
         EndCanvas.SetActive(true);
         EndText.text = "원인 : 추락사";
     }
+
+    //영상 컨트롤러
+    public VideoPlayer videoplayer;
+    public GameObject VideoCanvas;
     public void StageSuccess()
     {
+        StartCoroutine(FadeIn());
+        //EndCanvas.SetActive(true);
+        //EndResult.text = "스테이지 성공";
+        //EndText.text = "안전하게 작업을 완료하셨습니다! 수고하셨습니다!";
 
+        //영상 재생 및 씬다시 리로드
+        StartCoroutine(SceneReload(true));
     }
 
     float time = 0f;
@@ -76,4 +89,28 @@ public class SceneMngr_Rio : MonoBehaviour
         }
     }
 
+    IEnumerator SceneReload(bool isSuccess)
+    {
+        yield return new WaitForSecondsRealtime(3f);
+        //성공 -> 첫화면으로 이동
+        if (isSuccess)
+        {
+            //결과창 끄고
+            //PipeProgressImg.gameObject.SetActive(false);
+            //비디오 재생
+            VideoCanvas.SetActive(true);
+            videoplayer.Play();
+            yield return new WaitForSeconds(140f);
+            SceneManager.LoadScene(0);
+
+
+        }
+        //실패 
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+
+    }
 }

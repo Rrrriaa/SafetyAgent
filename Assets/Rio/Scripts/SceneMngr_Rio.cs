@@ -13,6 +13,7 @@ public class SceneMngr_Rio : MonoBehaviour
     ColorGrading color;
 
     public GameObject EndCanvas;
+    public Text EndTitle;
     public Text EndText;
 
     private void Awake()
@@ -38,7 +39,7 @@ public class SceneMngr_Rio : MonoBehaviour
         StartCoroutine(FadeInMono());
         StartCoroutine(FadeIn());
         EndCanvas.SetActive(true);
-        EndText.text = "원인 : 추락사";
+        //EndText.text = "원인 : 추락사";
     }
 
     //영상 컨트롤러
@@ -46,6 +47,10 @@ public class SceneMngr_Rio : MonoBehaviour
     public GameObject VideoCanvas;
     public void StageSuccess()
     {
+        EndTitle.text = "스테이지 성공!";
+        EndTitle.color = Color.blue;
+        EndText.text = "작업을 안전하게 마무리했습니다."+'\n' +"수고하셨습니다!";
+
         StartCoroutine(FadeIn());
         //EndCanvas.SetActive(true);
         //EndResult.text = "스테이지 성공";
@@ -97,6 +102,7 @@ public class SceneMngr_Rio : MonoBehaviour
         {
             //결과창 끄고
             //PipeProgressImg.gameObject.SetActive(false);
+            EndCanvas.SetActive(false);
             //비디오 재생
             VideoCanvas.SetActive(true);
             videoplayer.Play();

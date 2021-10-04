@@ -31,6 +31,7 @@ public class KHJ_Item : MonoBehaviour
             {
                 print("isBattery");
                 weldingSceneMngr.instance.isBattery = true;
+                weldingSceneMngr.instance.Audio.PlayOneShot(weldingSceneMngr.instance.SetBatterySound);
             }            
         }
 

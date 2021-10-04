@@ -19,7 +19,7 @@ public class Burn : MonoBehaviour
     {
         if(other.gameObject.name == "TorchFire")
         {
-            ActiveFireEft();            
+            ActiveFireEft();
         }
     }
 

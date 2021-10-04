@@ -39,6 +39,11 @@ public class weldingSceneMngr : MonoBehaviour
     public Text EndResult;
     public Text EndText;
 
+    public AudioSource Audio;
+    public AudioClip Success;
+    public AudioClip Fail;
+    public AudioClip SetBatterySound;
+
     private void Awake()
     {
         if (instance == null)
@@ -61,7 +66,7 @@ public class weldingSceneMngr : MonoBehaviour
     float SuccessTime = 10;
     void Update()
     {
-        Test();
+        //Test();
         SetBattery();
         SetPipe();
         //currTime += Time.deltaTime;
@@ -154,8 +159,13 @@ public class weldingSceneMngr : MonoBehaviour
 
     public void StageFail(FAIL_INDEX index)
     {
+        if (!Audio.clip)
+        {
+            Audio.clip = Fail;
+            Audio.Play();            
+        }
         StartCoroutine(FadeInMono());
-        StartCoroutine(FadeIn());
+        StartCoroutine(FadeIn(4f));
         EndCanvas.SetActive(true);
         EndResult.text = "스테이지 실패";
         if (index == FAIL_INDEX.HELMET)
@@ -172,7 +182,12 @@ public class weldingSceneMngr : MonoBehaviour
     public GameObject VideoCanvas;
     public void StageSuccess()
     {
-        StartCoroutine(FadeIn());
+        if (!Audio.clip)
+        {
+            Audio.clip = Success;
+            Audio.Play();
+        }
+        StartCoroutine(FadeIn(140f));
         EndCanvas.SetActive(true);
         EndResult.text = "스테이지 성공";
         EndText.text = "안전하게 작업을 완료하셨습니다! 수고하셨습니다!";
@@ -187,9 +202,9 @@ public class weldingSceneMngr : MonoBehaviour
     float F_time = 1f;
     float time1 = 0f;
     float F_time1 = 10f;
-    IEnumerator FadeIn()
+    IEnumerator FadeIn(float waitTime)
     {
-        yield return new WaitForSeconds(140f);
+        yield return new WaitForSeconds(waitTime);
         ColorParameter a = color.colorFilter;
         Color alpha = a.value;
         time = 0f;
@@ -208,6 +223,7 @@ public class weldingSceneMngr : MonoBehaviour
 
     IEnumerator FadeInMono()
     {
+        yield return new WaitForSeconds(1.5f);
         time = 0f;
         float alpha = color.saturation.value;
         while (alpha >= -100f)
@@ -240,6 +256,7 @@ public class weldingSceneMngr : MonoBehaviour
         //실패 
         else
         {
+            yield return new WaitForSecondsRealtime(4f);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 

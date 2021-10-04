@@ -87,6 +87,8 @@ public class Torch : MonoBehaviour
             {
                 //스테이지 실패
                 weldingSceneMngr.instance.StageFail(FAIL_INDEX.HELMET);
+                weldingSceneMngr.instance.isMask = true;
+                weldingSceneMngr.instance.isHelmet = false;
             }
         }
         else

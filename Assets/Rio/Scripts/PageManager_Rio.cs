@@ -5,14 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class PageManager_Rio : MonoBehaviour
 {
-    public void GoScene_01()
+    public AudioSource player;
+    public void GoToScene(int index)
     {
-        SceneManager.LoadScene(1);
+        player.Play();
+        SceneManager.LoadScene(index);
     }
-
-    public void GoScene_02()
-    {
-        SceneManager.LoadScene(2);
-    }
-
 }

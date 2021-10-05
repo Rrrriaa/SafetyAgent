@@ -52,5 +52,10 @@ public class KHJ_Item : MonoBehaviour
         
     }
 
+    public void SetTarp()
+    {
+        weldingSceneMngr.instance.isTarp = true;
+        weldingSceneMngr.instance.DeleteObj(GameObject.Find("Boxes"));
+    }
 
 }

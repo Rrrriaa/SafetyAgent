@@ -53,6 +53,11 @@ public class KHJ_HandCtrl : MonoBehaviour
             RaycastHit hit;
             if (Physics.SphereCast(ray, 0.1f, out hit, 1, layer))
             {
+                if(hit.transform.gameObject.tag == "Tarp")
+                {
+                    hit.transform.gameObject.GetComponent<Animator>().SetTrigger("Move");
+                    return;
+                }
                 //4. 부딪힌 물체를 잡는다. (부딪힌 물체를 오른손의 자식으로 한다)
                 hit.transform.parent = trRight;
                 hit.transform.position = trRight.position;

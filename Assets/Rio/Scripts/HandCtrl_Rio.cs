@@ -33,12 +33,12 @@ public class HandCtrl_Rio : MonoBehaviour
         if (OVRInput.GetDown(OVRInput.RawButton.Y, OVRInput.Controller.LTouch))
         {
             //Next
-            HelpMan.GetComponent<HelpMan>().DisplayNextSentence();
+            HelpMan.GetComponent<HelpMan_Rio>().DisplayNextSentence();
         }
         if (OVRInput.GetDown(OVRInput.RawButton.X, OVRInput.Controller.LTouch))
         {
             //Pre
-            HelpMan.GetComponent<HelpMan>().DisplayPreSentence();
+            HelpMan.GetComponent<HelpMan_Rio>().DisplayPreSentence();
         }
     }
 

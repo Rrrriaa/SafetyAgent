@@ -34,15 +34,13 @@ public class PlayerMove_Rio : MonoBehaviour
 
         //조이스틱 값 받아오기 x 좌우 ,y 상하
         Vector2 stickPos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch);
-
-        if (controller.isGrounded)
-        {
-            moveDirection = new Vector3(stickPos.x, 0, stickPos.y);
-            moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection *= speed;
-            if (Input.GetButton("Jump"))
-                moveDirection.y = jumpSpeed;
-        }
+                
+        moveDirection = new Vector3(stickPos.x, 0, stickPos.y);
+        moveDirection = transform.TransformDirection(moveDirection);
+        moveDirection *= speed;
+        if (Input.GetButton("Jump"))
+            moveDirection.y = jumpSpeed;
+        
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
     }
@@ -50,17 +48,18 @@ public class PlayerMove_Rio : MonoBehaviour
 
     void playerRot()
     {
-        transform.rotation = Quaternion.Euler(rot);
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickRight, OVRInput.Controller.RTouch))
+        if (!LiftSceneMngr.instance.isRide)
         {
-            rotPlus();
+            transform.rotation = Quaternion.Euler(rot);
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickRight, OVRInput.Controller.RTouch))
+            {
+                rotPlus();
+            }
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickLeft, OVRInput.Controller.RTouch))
+            {
+                rotMinus();
+            }
         }
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickLeft, OVRInput.Controller.RTouch))
-        {
-            rotMinus();
-        }
-
-
     }
 
     Vector3 rot;

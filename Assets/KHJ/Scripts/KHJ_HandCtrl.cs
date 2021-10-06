@@ -46,13 +46,21 @@ public class KHJ_HandCtrl : MonoBehaviour
         {
             //2. 오른손위치, 오른손앞방향에서 나가는 Ray를 만든다
             Ray ray = new Ray(trRight.position, trRight.forward);
-            
-            int layer = 1 << LayerMask.NameToLayer("CatchObj");
 
+            int layer = 1 << LayerMask.NameToLayer("CatchObj");
+            //int layer1 = 1 << LayerMask.NameToLayer("Box");
+            // layer | layer1   //비트연산
+            //int layer = LayerMask.GetMask("CatchObj", "Box");
+               
             #region SpereCast
             RaycastHit hit;
             if (Physics.SphereCast(ray, 0.1f, out hit, 1, layer))
             {
+                if(hit.transform.gameObject.tag == "Tarp")
+                {
+                    hit.transform.gameObject.GetComponent<Animator>().SetTrigger("Move");
+                    return;
+                }
                 //4. 부딪힌 물체를 잡는다. (부딪힌 물체를 오른손의 자식으로 한다)
                 hit.transform.parent = trRight;
                 hit.transform.position = trRight.position;
@@ -105,6 +113,10 @@ public class KHJ_HandCtrl : MonoBehaviour
                     weldingSceneMngr.instance.DeleteObj(trCatchedR.gameObject);
                     Destroy(trCatchedR.gameObject);
                     return;
+                case "BOX":
+                    LiftSceneMngr.instance.StackBox();
+                    Destroy(trCatchedR.gameObject);
+                    return;
             }
             trCatchedR = null;
         }
@@ -143,7 +155,6 @@ public class KHJ_HandCtrl : MonoBehaviour
 
     void Throwobj(Transform obj, OVRInput.Controller controller)
     {
-        SetKinematic(false, obj);
         //던지는 방향 (이동속력)
         Vector3 dir = OVRInput.GetLocalControllerVelocity(controller);
         // 던지는 회전방향 (회전속력)

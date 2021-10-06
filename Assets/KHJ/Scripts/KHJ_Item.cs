@@ -45,7 +45,6 @@ public class KHJ_Item : MonoBehaviour
                 weldingSceneMngr.instance.PipeText.text = "용접 시작";
             }
         }
-
     }
     private void OnTriggerExit(Collider other)
     {

@@ -16,7 +16,7 @@ public class ForkController : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate () {
 
-        Debug.Log(mastMoveTrue);
+        //Debug.Log(mastMoveTrue);
         if(fork.transform.localPosition.y >= maxYmast.y && fork.transform.localPosition.y < maxY.y)
         {
             mastMoveTrue = true;
@@ -32,7 +32,7 @@ public class ForkController : MonoBehaviour {
             mastMoveTrue = false;
         }
       
-        if (Input.GetKey(KeyCode.Alpha9))
+        if (OVRInput.Get(OVRInput.RawButton.B, OVRInput.Controller.RTouch))
         {
            //fork.Translate(Vector3.up * speedTranslate * Time.deltaTime);
             fork.transform.localPosition = Vector3.MoveTowards(fork.transform.localPosition, maxY, speedTranslate * Time.deltaTime);
@@ -42,7 +42,7 @@ public class ForkController : MonoBehaviour {
             }
           
         }
-        if (Input.GetKey(KeyCode.Alpha0))
+        if (OVRInput.Get(OVRInput.RawButton.A, OVRInput.Controller.RTouch))
         {
             fork.transform.localPosition = Vector3.MoveTowards(fork.transform.localPosition, minY, speedTranslate * Time.deltaTime);
 

@@ -22,6 +22,14 @@ public class NewCarUserControl : MonoBehaviour
             Vector2 stickPos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch);
             Vector2 stickPos1 = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch);
             
+            if(stickPos.y != 0)
+        {
+            if (LiftSceneMngr.instance.StackedBoxNum > 2)
+            {
+                LiftSceneMngr.instance.StageFail(FAIL_INDEX.OVERBOX);
+            }
+        }
+
 #if !MOBILE_INPUT
             float handbrake = Input.GetAxis("Jump");
             m_Car.Move(stickPos1.x, stickPos.y, stickPos.y, handbrake);

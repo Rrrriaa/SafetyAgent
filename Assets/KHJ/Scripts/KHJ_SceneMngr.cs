@@ -10,7 +10,10 @@ using UnityEngine.Video;
 public enum FAIL_INDEX
 {
     HELMET,
-    FIRE
+    FIRE,
+    HUMAN,
+    FALLBOX,
+    OVERBOX
 }
 public class KHJ_SceneMngr : MonoBehaviour
 {
@@ -57,6 +60,15 @@ public class KHJ_SceneMngr : MonoBehaviour
                 return;
             case FAIL_INDEX.FIRE:
                 EndText.text = "원인 : 발화" + '\n' + "tip : 가연성 물질을 제거하세요";
+                return;
+            case FAIL_INDEX.HUMAN:
+                EndText.text = "원인 : 인명사고" + '\n' + "tip : 지게차 운행시 주위를 잘 살피세요";
+                return;
+            case FAIL_INDEX.FALLBOX:
+                EndText.text = "원인 : 적재물 추락" + '\n' + "tip : 지게차 운행시 제한 속도를 지키세요";
+                return;
+            case FAIL_INDEX.OVERBOX:
+                EndText.text = "원인 : 적재물 초과" + '\n' + "tip : 초과화물 적재를 금지합니다";
                 return;
         }
     }

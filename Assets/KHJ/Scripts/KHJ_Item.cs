@@ -45,6 +45,21 @@ public class KHJ_Item : MonoBehaviour
                 weldingSceneMngr.instance.PipeText.text = "용접 시작";
             }
         }
+
+        if(name == "GhostBox")
+        {
+            if(other.gameObject.layer == 15)
+            {
+                LiftSceneMngr.instance.StageFail(FAIL_INDEX.FALLBOX);
+            }
+        }
+        if (name == "GoalBox")
+        {
+            if (other.gameObject.layer == 14)
+            {
+                LiftSceneMngr.instance.StageSuccess();
+            }
+        }
     }
     private void OnTriggerExit(Collider other)
     {

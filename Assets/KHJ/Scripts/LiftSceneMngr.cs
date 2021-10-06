@@ -13,7 +13,7 @@ public class LiftSceneMngr : KHJ_SceneMngr
     public GameObject Player2;
     public NewCarUserControl userControl;
     public bool isRide;
-
+    public GameObject guideLine;
 
     private void Awake()
     {
@@ -64,6 +64,7 @@ public class LiftSceneMngr : KHJ_SceneMngr
             Player1.transform.position = Player2.transform.position;
             Player1.GetComponent<CharacterController>().enabled = false;
             Player1.GetComponent<PlayerMove_Rio>().enabled = false;
+            guideLine.SetActive(true);
         }
         else
         {

@@ -20,9 +20,11 @@ public class PlayerMove_Rio : MonoBehaviour
       
     }
 
+   
     // Update is called once per frame
     void Update()
     {
+       
         playerMove();
         playerRot();
     }

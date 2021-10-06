@@ -59,8 +59,6 @@ public class HandCtrl_Rio : MonoBehaviour
 
             if (Physics.SphereCast (ray, 0.1f, out hit, 1f, layer))
             {
-                
-               
                 //4. 부딪힌 물체를 잡는다. (부딪힌 물체를 오른손의 자식으로 한다)
                 hit.transform.parent = trRight;
                 hit.transform.position = trRight.position;
@@ -98,7 +96,7 @@ public class HandCtrl_Rio : MonoBehaviour
 
         if (trCatchedR)
         {
-            if (trCatchedR.gameObject.name == "Helmet" || trCatchedR.gameObject.name == "WelderMask")
+            if (trCatchedR.gameObject.name == "Cover")
             {
                 Destroy(trCatchedR.gameObject);
                 trCatchedR = null;

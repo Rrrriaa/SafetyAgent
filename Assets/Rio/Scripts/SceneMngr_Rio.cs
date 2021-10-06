@@ -16,6 +16,9 @@ public class SceneMngr_Rio : MonoBehaviour
     public Text EndTitle;
     public Text EndText;
 
+
+    public AudioClip[] clips;
+
     private void Awake()
     {
         if (instance == null)
@@ -34,12 +37,23 @@ public class SceneMngr_Rio : MonoBehaviour
         
     }
 
+    //0 비명 1 바람 2 쿵
+    public void Scream()
+    {
+        GetComponent<AudioSource>().PlayOneShot(clips[0]);//비명
+        GetComponent<AudioSource>().PlayOneShot(clips[1]);//바람소리
+
+    }
+
     public void StageFail()
     {
+        GetComponent<AudioSource>().PlayOneShot(clips[2]);//바람소리
         StartCoroutine(FadeInMono());
         StartCoroutine(FadeIn());
         EndCanvas.SetActive(true);
-        //EndText.text = "원인 : 추락사";
+        EndText.text = "원인 : 추락사" + '\n' + "tip : 안전 구역 안내 시설 미설치";
+        //EndText.text = "원인 : 추락사";//씬다시 리로드
+        StartCoroutine(SceneReload(false));
     }
 
     //영상 컨트롤러

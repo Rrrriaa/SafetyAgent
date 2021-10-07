@@ -51,7 +51,7 @@ public class SceneMngr_Rio : MonoBehaviour
         StartCoroutine(FadeInMono());
         StartCoroutine(FadeIn());
         EndCanvas.SetActive(true);
-        EndText.text = "원인 : 추락사" + '\n' + "tip : 개구부 안내 시설을 설치하세요";
+        EndText.text = "원인 : 추락사" + '\n' + "tip : 개구부에 덮개를 설치하세요";
         StartCoroutine(SceneReload(false));
     }
 
@@ -78,7 +78,7 @@ public class SceneMngr_Rio : MonoBehaviour
         yield return new WaitForSeconds(3f);
         ColorParameter a = color.colorFilter;
         Color alpha = a.value;
-        time = 0f;
+        time1 = 0f;
         while (alpha.r > 0f)
         {
             color.saturation.value = -100;
@@ -116,7 +116,7 @@ public class SceneMngr_Rio : MonoBehaviour
             VideoCanvas.SetActive(true);
             videoplayer.Play();
             yield return new WaitForSeconds((float)videoplayer.clip.length + 1);
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene("Scene_00_Start");
 
 
         }

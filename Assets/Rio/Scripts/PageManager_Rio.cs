@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class PageManager_Rio : MonoBehaviour
 {
     public AudioSource player;
-    public void GoToScene(int index)
+    public void GoToScene(string scenename)
     {
         player.Play();
-        SceneManager.LoadScene(index);
+        SceneManager.LoadScene(scenename);
     }
 }

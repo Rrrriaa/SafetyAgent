@@ -11,20 +11,18 @@ public class PlayerMove_Rio : MonoBehaviour
     public float gravity = 20.0F;
     private Vector3 moveDirection = Vector3.zero;
 
-   
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
-
-      
     }
 
-   
+
     // Update is called once per frame
     void Update()
     {
-       
+
         playerMove();
         playerRot();
     }
@@ -34,13 +32,13 @@ public class PlayerMove_Rio : MonoBehaviour
 
         //조이스틱 값 받아오기 x 좌우 ,y 상하
         Vector2 stickPos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch);
-                
+
         moveDirection = new Vector3(stickPos.x, 0, stickPos.y);
         moveDirection = transform.TransformDirection(moveDirection);
         moveDirection *= speed;
         if (Input.GetButton("Jump"))
             moveDirection.y = jumpSpeed;
-        
+
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
     }
@@ -48,18 +46,17 @@ public class PlayerMove_Rio : MonoBehaviour
 
     void playerRot()
     {
-        if (!LiftSceneMngr.instance.isRide)
+
+        transform.rotation = Quaternion.Euler(rot);
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickRight, OVRInput.Controller.RTouch))
         {
-            transform.rotation = Quaternion.Euler(rot);
-            if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickRight, OVRInput.Controller.RTouch))
-            {
-                rotPlus();
-            }
-            if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickLeft, OVRInput.Controller.RTouch))
-            {
-                rotMinus();
-            }
+            rotPlus();
         }
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickLeft, OVRInput.Controller.RTouch))
+        {
+            rotMinus();
+        }
+
     }
 
     Vector3 rot;

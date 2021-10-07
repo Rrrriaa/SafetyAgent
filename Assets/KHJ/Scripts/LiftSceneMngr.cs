@@ -25,10 +25,6 @@ public class LiftSceneMngr : KHJ_SceneMngr
             Destroy(gameObject);
     }
 
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
@@ -38,7 +34,7 @@ public class LiftSceneMngr : KHJ_SceneMngr
         }
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
-            StageSuccess();
+            StageFail(FAIL_INDEX.FALLBOX);
         }
         CheckRide();
     }

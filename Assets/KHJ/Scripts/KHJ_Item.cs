@@ -50,6 +50,7 @@ public class KHJ_Item : MonoBehaviour
         {
             if(other.gameObject.layer == 15)
             {
+                transform.parent = null;
                 LiftSceneMngr.instance.StageFail(FAIL_INDEX.FALLBOX);
             }
         }

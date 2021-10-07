@@ -30,20 +30,23 @@ public class Quiz : MonoBehaviour
 
     public void CheckAnswer(bool answer)
     {
+        print("버튼 입력");
         if (answer)
             Correct();
         else
             Wrong();
+        QuizMngr.instance.PerfectCheck();
     }
 
     void Correct()
-    {
+    {        
         question.isCorrect = true;
         question.Wrong.SetActive(false);
         question.Correct.SetActive(true);
     }
     void Wrong()
     {
+        question.isCorrect = false;
         question.Correct.SetActive(false);
         question.Wrong.SetActive(true);
     }

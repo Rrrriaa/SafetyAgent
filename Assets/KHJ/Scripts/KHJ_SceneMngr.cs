@@ -25,12 +25,17 @@ public class KHJ_SceneMngr : MonoBehaviour
     public AudioClip Success;
     public AudioClip Fail;
 
+    public PostProcessVolume PostProcess;
     ColorGrading color;
     // Start is called before the first frame update
     void Start()
     {
-        var PostProcess = FindObjectOfType<PostProcessVolume>();
+        PostProcess = FindObjectOfType<PostProcessVolume>();
         color = PostProcess.profile.GetSetting<ColorGrading>();
+        if (color == null)
+        {
+            print("¸øÃ£À½");
+        }
     }
 
     // Update is called once per frame
@@ -115,7 +120,7 @@ public class KHJ_SceneMngr : MonoBehaviour
     }
 
 
-    IEnumerator FadeInMono()
+    protected IEnumerator FadeInMono()
     {
         yield return new WaitForSeconds(1.5f);
         time = 0f;

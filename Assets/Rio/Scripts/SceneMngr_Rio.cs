@@ -115,7 +115,7 @@ public class SceneMngr_Rio : MonoBehaviour
             //비디오 재생
             VideoCanvas.SetActive(true);
             videoplayer.Play();
-            yield return new WaitForSeconds(140f);
+            yield return new WaitForSeconds((float)videoplayer.clip.length + 1);
             SceneManager.LoadScene(0);
 
 

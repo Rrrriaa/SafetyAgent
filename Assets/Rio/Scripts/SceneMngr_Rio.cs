@@ -51,8 +51,7 @@ public class SceneMngr_Rio : MonoBehaviour
         StartCoroutine(FadeInMono());
         StartCoroutine(FadeIn());
         EndCanvas.SetActive(true);
-        EndText.text = "원인 : 추락사" + '\n' + "tip : 안전 구역 안내 시설 미설치";
-        //EndText.text = "원인 : 추락사";//씬다시 리로드
+        EndText.text = "원인 : 추락사" + '\n' + "tip : 개구부 안내 시설을 설치하세요";
         StartCoroutine(SceneReload(false));
     }
 
@@ -61,15 +60,11 @@ public class SceneMngr_Rio : MonoBehaviour
     public GameObject VideoCanvas;
     public void StageSuccess()
     {
+        StartCoroutine(FadeIn());
+        EndCanvas.SetActive(true);
         EndTitle.text = "스테이지 성공!";
         EndTitle.color = Color.blue;
-        EndText.text = "작업을 안전하게 마무리했습니다."+'\n' +"수고하셨습니다!";
-
-        StartCoroutine(FadeIn());
-        //EndCanvas.SetActive(true);
-        //EndResult.text = "스테이지 성공";
-        //EndText.text = "안전하게 작업을 완료하셨습니다! 수고하셨습니다!";
-
+        EndText.text = "작업을 안전하게 마무리했습니다." + '\n' + "수고하셨습니다!";
         //영상 재생 및 씬다시 리로드
         StartCoroutine(SceneReload(true));
     }
@@ -110,7 +105,7 @@ public class SceneMngr_Rio : MonoBehaviour
 
     IEnumerator SceneReload(bool isSuccess)
     {
-        yield return new WaitForSecondsRealtime(3f);
+        yield return new WaitForSecondsRealtime(5f);
         //성공 -> 첫화면으로 이동
         if (isSuccess)
         {

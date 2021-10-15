@@ -11,4 +11,9 @@ public class PageManager_Rio : MonoBehaviour
         player.Play();
         SceneManager.LoadScene(scenename);
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }
